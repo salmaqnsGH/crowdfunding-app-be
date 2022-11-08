@@ -4,6 +4,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"github.com/salmaqnsGH/crowdfunding-app/helper"
 	"github.com/salmaqnsGH/crowdfunding-app/user"
 )
 
@@ -27,10 +28,12 @@ func (h *userHandler) RegisterUser(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, nil)
 	}
 
-	user, err := h.userService.RegisterUser(input)
+	newUser, err := h.userService.RegisterUser(input)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, nil)
 	}
 
-	c.JSON(http.StatusOK, user)
+	formatter := user.FormatUser(newUser, "JWTToken")
+	response := helper.APIResponse("User has been registered", http.StatusOK, "success", formatter)
+	c.JSON(http.StatusOK, response)
 }
