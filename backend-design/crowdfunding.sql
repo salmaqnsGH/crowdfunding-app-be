@@ -1,5 +1,5 @@
 CREATE TABLE "users" (
-  "id" integer PRIMARY KEY,
+  "id" SERIAL PRIMARY KEY,
   "name" varchar,
   "occupation" varchar,
   "email" varchar,
@@ -8,11 +8,11 @@ CREATE TABLE "users" (
   "role" varchar,
   "token" varchar,
   "created_at" timestamptz DEFAULT (now()),
-  "updated_at" timestamptz
+  "updated_at" timestamptz DEFAULT (now())
 );
 
 CREATE TABLE "campaigns" (
-  "id" integer PRIMARY KEY,
+  "id" SERIAL PRIMARY KEY,
   "user_id" integer,
   "name" varchar,
   "short_description" varchar,
@@ -22,25 +22,25 @@ CREATE TABLE "campaigns" (
   "backer_count" integer,
   "slug" varchar,
   "created_at" timestamptz DEFAULT (now()),
-  "updated_at" timestamptz
+  "updated_at" timestamptz DEFAULT (now())
 );
 
 CREATE TABLE "campaign_images" (
-  "id" integer PRIMARY KEY,
+  "id" SERIAL PRIMARY KEY,
   "campaign_id" integer,
   "file_name" varchar,
   "is_primary" integer,
   "created_at" timestamptz DEFAULT (now()),
-  "updated_at" timestamptz
+  "updated_at" timestamptz DEFAULT (now())
 );
 
 CREATE TABLE "transactions" (
-  "id" integer PRIMARY KEY,
+  "id" SERIAL PRIMARY KEY,
   "campaign_id" integer,
   "user_id" integer,
   "amount" integer,
   "created_at" timestamptz DEFAULT (now()),
-  "updated_at" timestamptz
+  "updated_at" timestamptz DEFAULT (now())
 );
 
 CREATE INDEX ON "campaigns" ("user_id");
@@ -60,4 +60,4 @@ ALTER TABLE "transactions" ADD FOREIGN KEY ("campaign_id") REFERENCES "campaigns
 
 ALTER TABLE "transactions" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
 
-INSERT INTO users( id ,name ,occupation ,email ,password_hash ,avatar_file_name ,role ,token ,created_at ,updated_at ) VALUES(1,'nana','-','-','-','-','-','-','2017-08-15 21:05:15.723336+07','2017-08-15 21:05:15.723336+07');
+INSERT INTO users( id ,name ,occupation ,email ,password_hash ,avatar_file_name ,role ,token ,created_at ,updated_at ) VALUES('nana','-','-','-','-','-','-');

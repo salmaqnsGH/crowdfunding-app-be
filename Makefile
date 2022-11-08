@@ -1,3 +1,6 @@
+postgrecmd:
+	docker exec -it postgres14 bash
+
 createdb:
 	docker exec -it postgres14 createdb --username=root --owner=root crowdfunding
 

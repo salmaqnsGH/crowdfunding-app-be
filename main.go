@@ -20,9 +20,19 @@ func main() {
 	fmt.Println("koneksi database berhasil!")
 
 	userRepository := user.NewRepository(db)
-	user := user.User{
-		Name: "Test simpan",
-	}
+	userService := user.NewService(userRepository)
 
-	userRepository.Save(user)
+	userInput := user.RegisterUserInput{}
+	userInput.Name = "name"
+	userInput.Email = "name@email.com"
+	userInput.Occupation = "occupation"
+	userInput.Password = "password"
+
+	userService.RegisterUser(userInput)
+
+	// input dari user
+	// handler : mapping input dari user ke struct input
+	// service : mapping dari struct input ke struct user
+	// repository : save struct user ke db
+	// db
 }
