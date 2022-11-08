@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"log"
 
+	"github.com/gin-gonic/gin"
+	"github.com/salmaqnsGH/crowdfunding-app/handler"
 	"github.com/salmaqnsGH/crowdfunding-app/user"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
@@ -22,14 +24,15 @@ func main() {
 	userRepository := user.NewRepository(db)
 	userService := user.NewService(userRepository)
 
-	userInput := user.RegisterUserInput{}
-	userInput.Name = "name"
-	userInput.Email = "name@email.com"
-	userInput.Occupation = "occupation"
-	userInput.Password = "password"
+	userHandler := handler.NewUserHandler(userService)
 
-	userService.RegisterUser(userInput)
+	router := gin.Default()
 
+	api := router.Group("/api/v1")
+
+	api.POST("/users", userHandler.RegisterUser)
+
+	router.Run()
 	// input dari user
 	// handler : mapping input dari user ke struct input
 	// service : mapping dari struct input ke struct user
