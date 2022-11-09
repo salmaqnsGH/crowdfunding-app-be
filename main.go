@@ -5,6 +5,7 @@ import (
 	"log"
 
 	"github.com/gin-gonic/gin"
+	"github.com/salmaqnsGH/crowdfunding-app/auth"
 	"github.com/salmaqnsGH/crowdfunding-app/handler"
 	"github.com/salmaqnsGH/crowdfunding-app/user"
 	"gorm.io/driver/postgres"
@@ -23,8 +24,9 @@ func main() {
 
 	userRepository := user.NewRepository(db)
 	userService := user.NewService(userRepository)
+	authService := auth.NewService()
 
-	userHandler := handler.NewUserHandler(userService)
+	userHandler := handler.NewUserHandler(userService, authService)
 
 	router := gin.Default()
 
