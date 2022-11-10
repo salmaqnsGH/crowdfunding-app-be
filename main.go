@@ -9,6 +9,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/golang-jwt/jwt/v4"
 	"github.com/salmaqnsGH/crowdfunding-app/auth"
+	"github.com/salmaqnsGH/crowdfunding-app/campaign"
 	"github.com/salmaqnsGH/crowdfunding-app/handler"
 	"github.com/salmaqnsGH/crowdfunding-app/helper"
 	"github.com/salmaqnsGH/crowdfunding-app/user"
@@ -27,6 +28,19 @@ func main() {
 	fmt.Println("koneksi database berhasil!")
 
 	userRepository := user.NewRepository(db)
+	campaignRepository := campaign.NewRepository(db)
+
+	campaigns, err := campaignRepository.FindByUserID(1)
+
+	fmt.Println("=================")
+	fmt.Println(campaigns)
+	fmt.Println("=================")
+	for _, campaign := range campaigns {
+		fmt.Println(campaign)
+		fmt.Println(campaign.CampaignImages[0].FileName)
+	}
+	fmt.Println("=================")
+
 	userService := user.NewService(userRepository)
 	authService := auth.NewService()
 
@@ -42,11 +56,6 @@ func main() {
 	api.POST("/avatars", authMiddleware(authService, userService), userHandler.UploadAvatar)
 
 	router.Run()
-	// input dari user
-	// handler : mapping input dari user ke struct input
-	// service : mapping dari struct input ke struct user
-	// repository : save struct user ke db
-	// db
 }
 
 func authMiddleware(authService auth.Service, userService user.Service) gin.HandlerFunc {
