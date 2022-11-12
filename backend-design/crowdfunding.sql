@@ -19,6 +19,7 @@ CREATE TABLE "campaigns" (
   "description" text,
   "goal_amount" integer,
   "current_amount" integer,
+  "perks" text,
   "backer_count" integer,
   "slug" varchar,
   "created_at" timestamptz DEFAULT (now()),
@@ -63,3 +64,5 @@ ALTER TABLE "transactions" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id")
 INSERT INTO users( id ,name ,occupation ,email ,password_hash ,avatar_file_name ,role ,token ,created_at ,updated_at ) VALUES('nana','-','-','-','-','-','-',now(),now());
 INSERT INTO campaigns( id,user_id ,name ,short_description ,description ,goal_amount ,current_amount ,backer_count ,slug ,created_at ,updated_at ) VALUES(1,1,'nana2','-','-',0,0,0,'-',now(),now());
 INSERT INTO campaign_images( id,campaign_id ,file_name ,is_primary ,created_at ,updated_at ) VALUES(3,1,'tiga.png',0,now(),now());
+
+ALTER TABLE campaigns ADD perks text;
