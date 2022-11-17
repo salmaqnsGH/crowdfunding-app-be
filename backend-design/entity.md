@@ -21,6 +21,7 @@
     - current_amount (int)
     - backer_count (int)
     - slug (varchar)
+    - perks (text)
     - created_at (datetime)
     - updated_at (datetime)
 
@@ -37,6 +38,8 @@
     - campaign_id (int)
     - user_id (int)
     - amount (int)
+    - status (varchar)
+    - code (varchar)
     - created_at (datetime)
     - updated_at (datetime)
 

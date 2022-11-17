@@ -40,6 +40,8 @@ CREATE TABLE "transactions" (
   "campaign_id" integer,
   "user_id" integer,
   "amount" integer,
+  "status" varchar,
+  "code" varchar,
   "created_at" timestamptz DEFAULT (now()),
   "updated_at" timestamptz DEFAULT (now())
 );
@@ -67,3 +69,5 @@ INSERT INTO campaign_images( id,campaign_id ,file_name ,is_primary ,created_at ,
 INSERT INTO transactions( id,campaign_id ,user_id ,amount ,created_at ,updated_at ) VALUES(1,3,1,100,now(),now());
 
 ALTER TABLE campaigns ADD perks text;
+ALTER TABLE transactions ADD status varchar;
+ALTER TABLE transactions ADD code varchar;
