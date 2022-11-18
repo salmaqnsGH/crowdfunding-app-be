@@ -12,6 +12,7 @@ import (
 	"github.com/salmaqnsGH/crowdfunding-app/campaign"
 	"github.com/salmaqnsGH/crowdfunding-app/handler"
 	"github.com/salmaqnsGH/crowdfunding-app/helper"
+	"github.com/salmaqnsGH/crowdfunding-app/payment"
 	"github.com/salmaqnsGH/crowdfunding-app/transaction"
 	"github.com/salmaqnsGH/crowdfunding-app/user"
 	"gorm.io/driver/postgres"
@@ -35,7 +36,8 @@ func main() {
 	authService := auth.NewService()
 	userService := user.NewService(userRepository)
 	campaignService := campaign.NewService(campaignRepository)
-	transactionService := transaction.NewService(transactionRepository, campaignRepository)
+	paymentService := payment.NewService()
+	transactionService := transaction.NewService(transactionRepository, campaignRepository, paymentService)
 
 	userHandler := handler.NewUserHandler(userService, authService)
 	campaignHandler := handler.NewCampaignHandler(campaignService)
