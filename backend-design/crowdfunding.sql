@@ -71,3 +71,4 @@ INSERT INTO transactions( id,campaign_id ,user_id ,amount ,created_at ,updated_a
 ALTER TABLE campaigns ADD perks text;
 ALTER TABLE transactions ADD status varchar;
 ALTER TABLE transactions ADD code varchar;
+ALTER TABLE transactions ADD payment_url varchar;
