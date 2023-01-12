@@ -60,6 +60,7 @@ func (h *campaignHandler) CreateCampaign(c *gin.Context) {
 	var input campaign.CreateCampaignInput
 
 	err := c.ShouldBindJSON(&input)
+	fmt.Println(input)
 	if err != nil {
 		errors := helper.FormatValidationError(err)
 		errorMessage := gin.H{"errors": errors}
@@ -167,5 +168,4 @@ func (h *campaignHandler) UploadImage(c *gin.Context) {
 	response := helper.APIResponse("Successfully upload campaign image", http.StatusOK, "success", data)
 
 	c.JSON(http.StatusOK, response)
-
 }
