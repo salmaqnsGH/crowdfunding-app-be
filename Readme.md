@@ -1,4 +1,4 @@
 # CROWDFUNDING APP
 
 ## Golang
-## Vue.js
+## React.js
